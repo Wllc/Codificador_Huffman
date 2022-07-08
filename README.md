@@ -7,8 +7,8 @@
     * Anderson Henrique - https://github.com/Atla33
     * Gustavo Maciel - https://github.com/Gus-1003
     * Tobias Santos - https://github.com/tobiasPaes
-    * Richard Robert - 
-    * Wallace - 
+    * Richard Robert - https://github.com/richard018
+    * Wallace Gabriel - https://github.com/Wllc
     
 ## Objetivos:
 1) Crie um programa em javascript que leia um arquivo de
