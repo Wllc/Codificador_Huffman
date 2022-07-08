@@ -1,0 +1,13 @@
+{
+  "name": "text-compactor",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "compress": "node ./src/run-compress.js",
+    "uncompress": "node ./src/run-uncompress.js"
+  },
+  "description": "text compactor using the Huffman algorithm",
+  "main": "index.js",
+  "repository": "https://github.com/yuredev/text-compactor.git",
+  "license": "MIT"
+}
