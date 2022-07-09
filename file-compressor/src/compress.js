@@ -5,6 +5,8 @@ const fs = require('fs');
  * @param {string} inputPath caminho para o arquivo que será lido 
  * @param {string} outputPath caminho para salvar o arquivo comprimido
  */
+
+// Wallace ===========================================================================
 function compress(inputPath, outputPath) {
   const fileContent = fs.readFileSync(inputPath).toString();
   const charCounter = {}; //dicionario
@@ -20,7 +22,9 @@ function compress(inputPath, outputPath) {
 
   // 
   const charRanking = Object.entries(charCounter).sort((e1, e2) => e2[1] - e1[1]);
-
+  
+  
+// Gustavo ===========================================================================
   let tree = charRanking.map(el => ({ 
     letter: el[0],
     value: el[1]
@@ -38,7 +42,9 @@ function compress(inputPath, outputPath) {
     });
   }
   tree = tree[0];
-
+  
+  
+// Anderson ===========================================================================
   const codeMap = {};
   createCodeMap(codeMap, tree);
   
@@ -48,13 +54,17 @@ function compress(inputPath, outputPath) {
     encodedText += codeMap[char];
   }
   
+  
+// Tobias =========================================================================== 
   // juntar todo hashMap para salvar na primeira linha do arquivo
   let fileHeader = Object.entries(codeMap).reduce((acc, cur, i, arr) => {
     let result = acc + `${cur[0]}${cur[1]}`;
     result += i < arr.length - 1 ? ',' : '';
     return result;
   }, '');
-
+  
+  
+// Wallace ===========================================================================
   fileHeader += process.platform === 'linux' ? '\n' : '\r\n';
   // juntar primeira linha com o texto codificado
   const textToSave = fileHeader + encodedText;
@@ -62,6 +72,7 @@ function compress(inputPath, outputPath) {
   fs.writeFileSync(outputPath, textToSave);
 }
 
+// Anderson =========================================================================== 
 function createCodeMap(codeMap, tree) {
   fillCodeMap(codeMap, '', tree);
 }
@@ -75,6 +86,8 @@ function fillCodeMap(letterCodeHash, steps, tree) {
   fillCodeMap(letterCodeHash, steps + '1', tree.right);
 }
 
+
+// Gustavo =========================================================================== 
 /**
  * Monta a arvore a partir do hashmap
  * @param {object} codeMap
@@ -110,6 +123,7 @@ function getTreeByCodeMap(codeMap) {
   return tree;
 }
 
+// Richard =========================================================================== 
 function mountHashMap(hashMapString) {
   const codeMap = hashMapString.split(',');
   const hashMap = {};
@@ -120,13 +134,18 @@ function mountHashMap(hashMapString) {
   return hashMap;
 }
 
+
+// Tobias =========================================================================== 
 function uncompress(inputPath, outputPath) {
   const fileContent = fs.readFileSync(inputPath).toString();
   const [ hashMapString, encodedText ] = fileContent.split(process.platform === 'linux' ? '\n' : '\r\n');
   
+  // Richard ===========================================================================
   const codeMap = mountHashMap(hashMapString);
   const tree = getTreeByCodeMap(codeMap);
   
+  
+  // Tobias =========================================================================== 
   let currentNode = tree;
   let uncompressedText = '';
   
